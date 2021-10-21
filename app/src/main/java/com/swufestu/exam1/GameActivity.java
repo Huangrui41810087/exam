@@ -1,13 +1,20 @@
 package com.swufestu.exam1;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Point;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.GridLayout;
+import android.widget.Toast;
+
+
+import androidx.appcompat.widget.AppCompatSpinner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,8 +86,6 @@ public class GameActivity extends GridLayout {
                             } else if (offsetY > 5) {
                                 moveDown();
                                 Log.i(TAG, "onTouch: Down");
-
-
                             }
                         }
                         break;
@@ -120,6 +125,8 @@ public class GameActivity extends GridLayout {
                }
                RandomNum();
                RandomNum();
+
+
 
     }
     private void RandomNum(){
@@ -163,8 +170,9 @@ public class GameActivity extends GridLayout {
                 }
             }
         }
-        if(merge){
+        if(merge){//只要有合并就添加随机数
             RandomNum();
+            endGame();
         }
     }
 
@@ -200,6 +208,7 @@ public class GameActivity extends GridLayout {
         }
         if(merge){
             RandomNum();
+            endGame();
         }
     }
 
@@ -235,6 +244,7 @@ public class GameActivity extends GridLayout {
         }
         if(merge){
             RandomNum();
+            endGame();
         }
     }
 
@@ -272,8 +282,51 @@ public class GameActivity extends GridLayout {
         }
         if(merge){
             RandomNum();
+            endGame();
         }
     }
+
+    private void endGame(){//游戏结束
+
+        boolean end = true;
+
+        ALL:
+        for(int j=0;j<4;j++){
+            for(int i=0;i<4;i++){
+                if(cMap[i][j].getNum()==0//当前位置卡片有空值
+                        ||(i>0&&cMap[i][j].equals(cMap[i-1][j]))//往左方向判断还有无合并项
+                        ||(i<3&&cMap[i][j].equals(cMap[i+1][j]))//往右方向判断还有无合并项
+                        ||(j>0&&cMap[i][j].equals(cMap[i][j-1]))//往上方向判断还有无合并项
+                        ||(j<3&&cMap[i][j].equals(cMap[i][j+1]))//往下方向判断还有无合并项
+                ){
+                    end = false;//游戏继续
+                    break ALL;//退出整个循环
+
+                }
+            }
+
+        }
+        if(end){//游戏结束页面出现消息对话框
+            AlertDialog.Builder dialog = new AlertDialog.Builder
+                    (getContext()).setTitle("你好").setMessage("游戏结束了").setPositiveButton("重新开始", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    startGame();
+                }
+            });
+            dialog.setNegativeButton("退出游戏",new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    System.exit(0);
+                }
+            });//添加两个按钮，监听动作
+
+            dialog.show();
+
+        }
+
+    }
+
 
 
 }

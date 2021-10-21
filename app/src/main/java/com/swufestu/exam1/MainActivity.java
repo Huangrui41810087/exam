@@ -1,10 +1,9 @@
 package com.swufestu.exam1;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
+
 
 public class MainActivity extends AppCompatActivity {
     private TextView cScore;
@@ -21,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         cScore = (TextView) findViewById(R.id.tScore);//获取分数
 
+
     }
 
     public void clearScore(){//重置分数
@@ -30,12 +30,14 @@ public class MainActivity extends AppCompatActivity {
     public void showScore(){//分数呈现
         cScore.setText(score+"");
     }
+
     public void addScore(int sc){
         score = score+sc;
         showScore();
     }
 
-    public static MainActivity getMainActivity() {
+    public static MainActivity getMainActivity()
+    {
         return mainActivity;
     }
 }
