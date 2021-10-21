@@ -18,15 +18,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/score"
+            android:text="@string/cscore"
+            android:textSize="32dp"
          />
 
         <TextView
-            android:id="@+id/cScore"
+            android:id="@+id/tScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="@string/cScore" />
+            android:textSize="32dp"/>
     </LinearLayout>
 
     <com.swufestu.exam1.GameActivity

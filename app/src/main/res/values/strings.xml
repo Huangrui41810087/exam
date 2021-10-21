@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">2048在线游戏</string>
-    <string name="score">最高分</string>
-    <string name="cScore">当前分数</string>
+    <string name="cscore">当前分数：</string>
 </resources>

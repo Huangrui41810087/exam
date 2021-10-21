@@ -10,7 +10,7 @@ public class CardActivity extends FrameLayout {
     public CardActivity(Context context) {
         super(context);
         tv = new TextView(getContext());
-        tv.setTextSize(32);
+        tv.setTextSize(48);
         tv.setBackgroundColor(0x3300BFFF);
         tv.setGravity(Gravity.CENTER);
         //为卡片增加布局参数

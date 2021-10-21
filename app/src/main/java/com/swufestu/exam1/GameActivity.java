@@ -111,6 +111,8 @@ public class GameActivity extends GridLayout {
     }
 
     private void startGame(){
+
+        MainActivity.getMainActivity().clearScore();
                for (int i=0;i<4;i++){
                    for (int j=0;j<4;j++){
                        cMap[i][j].setNum(0);//游戏开始时都初始为0
@@ -118,12 +120,7 @@ public class GameActivity extends GridLayout {
                }
                RandomNum();
                RandomNum();
-               RandomNum();
-               RandomNum();
-        RandomNum();
-        RandomNum();
-        RandomNum();
-        RandomNum();
+
     }
     private void RandomNum(){
 
@@ -148,13 +145,16 @@ public class GameActivity extends GridLayout {
                             cMap[i][j].setNum(cMap[i1][j].getNum());
                             cMap[i1][j].setNum(0);
                             i--;//往左遍历
-                            break;
+
                         }
                         else if(cMap[i][j].equals(cMap[i1][j])){
                             cMap[i][j].setNum(cMap[i][j].getNum()*2);//合并相同的数
                             cMap[i1][j].setNum(0);
-                            break;
+
+                            MainActivity.getMainActivity().addScore(cMap[i][j].getNum());//在卡片合并时进行加分
+
                         }
+                        break;
                     }
                 }
             }
@@ -171,13 +171,16 @@ public class GameActivity extends GridLayout {
                             cMap[i][j].setNum(cMap[i1][j].getNum());
                             cMap[i1][j].setNum(0);
                             i++;//往右遍历
-                            break;
+
                         }
                         else if(cMap[i][j].equals(cMap[i1][j])){
                             cMap[i][j].setNum(cMap[i][j].getNum()*2);
                             cMap[i1][j].setNum(0);
-                            break;
+
+                            MainActivity.getMainActivity().addScore(cMap[i][j].getNum());//在卡片合并时进行加分
+
                         }
+                        break;
                     }
                 }
             }
@@ -194,13 +197,16 @@ public class GameActivity extends GridLayout {
                             cMap[i][j].setNum(cMap[i][j1].getNum());
                             cMap[i][j1].setNum(0);
                             j--;//往下遍历
-                            break;
+
                         }
                         else if(cMap[i][j].equals(cMap[i][j1])){
                             cMap[i][j].setNum(cMap[i][j].getNum()*2);
                             cMap[i][j1].setNum(0);
-                            break;
+
+                            MainActivity.getMainActivity().addScore(cMap[i][j].getNum());//在卡片合并时进行加分
+
                         }
+                        break;
                     }
                 }
             }
@@ -217,13 +223,16 @@ public class GameActivity extends GridLayout {
                             cMap[i][j].setNum(cMap[i][j1].getNum());
                             cMap[i][j1].setNum(0);
                             j++;
-                            break;
+
                         }
                         else if(cMap[i][j].equals(cMap[i][j1])){
                             cMap[i][j].setNum(cMap[i][j].getNum()*2);
                             cMap[i][j1].setNum(0);
-                            break;
+
+                            MainActivity.getMainActivity().addScore(cMap[i][j].getNum());//在卡片合并时进行加分
+
                         }
+                        break;
                     }
                 }
             }
