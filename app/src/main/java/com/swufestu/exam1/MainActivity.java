@@ -1,7 +1,13 @@
 package com.swufestu.exam1;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.GridLayout;
 import android.widget.TextView;
 
 
@@ -22,6 +28,45 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    public void click(View replay){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("提示：");
+        dialog.setMessage("你确定重新开始吗？");
+        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        dialog.show();
+    }
+    public void clickb(View end){
+        AlertDialog.Builder dialog1 = new AlertDialog.Builder(this);
+        dialog1.setTitle("提示：");
+        dialog1.setMessage("你确定退出吗？");
+                dialog1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        System.exit(0);
+                    }
+                });
+
+        dialog1.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        dialog1.show();
+    }
+
 
     public void clearScore(){//重置分数
         score = 0;

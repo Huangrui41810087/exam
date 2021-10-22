@@ -19,21 +19,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cscore"
-            android:textSize="32dp"
+            android:textSize="24dp"
          />
 
         <TextView
             android:id="@+id/tScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="32dp"/>
+            android:textSize="24dp"/>
+
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="0dp">
+
+        <Button
+            android:id="@+id/replay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:onClick="click"
+            android:text="@string/replay" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:text="@string/end"
+        android:id="@+id/end"
+        android:onClick="clickb"/>
+</LinearLayout>
 
     <com.swufestu.exam1.GameActivity
         android:id="@+id/gameActivity"
-        android:layout_marginTop="10dp"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="5dp"
         android:layout_weight="1">
     </com.swufestu.exam1.GameActivity>
 

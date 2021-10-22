@@ -3,27 +3,27 @@ package com.swufestu.exam1;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Point;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.GridLayout;
-import android.widget.Toast;
 
 
-import androidx.appcompat.widget.AppCompatSpinner;
+
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameActivity extends GridLayout {
     private static final String TAG = "GameActivity";
+
     private CardActivity[][] cMap=new CardActivity[4][4];//利用二维数组来存放网格
     private List<Point> emptyPoints = new ArrayList<Point>();//利用数组来存放空点位置
-
     public GameActivity(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initGameActivity();
@@ -125,10 +125,25 @@ public class GameActivity extends GridLayout {
                }
                RandomNum();
                RandomNum();
-
-
+        RandomNum();
+        RandomNum();
+        RandomNum();
+        RandomNum();
+        RandomNum();
+        RandomNum();
+        RandomNum();
+        RandomNum();
+        RandomNum();
+        RandomNum();
+        RandomNum();
+        RandomNum();
+        RandomNum();
+        RandomNum();
 
     }
+
+
+
     private void RandomNum(){
 
         emptyPoints.clear();//先清空空点
@@ -311,13 +326,15 @@ public class GameActivity extends GridLayout {
                     (getContext()).setTitle("你好").setMessage("游戏结束了").setPositiveButton("重新开始", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    Log.i(TAG, "onClick: 重新开始");
                     startGame();
                 }
             });
             dialog.setNegativeButton("退出游戏",new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    System.exit(0);
+                    Log.i(TAG, "onClick: 退出游戏");
+                   System.exit(0);
                 }
             });//添加两个按钮，监听动作
 
@@ -327,6 +344,8 @@ public class GameActivity extends GridLayout {
 
     }
 
+    private void startActivity(Intent intent) {
+    }
 
 
 }
