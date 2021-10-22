@@ -20,9 +20,17 @@ public class FirstActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(FirstActivity.this,MainActivity.class);
-                startActivity(intent);
+                switch (v.getId()) {
+                    case R.id.btn:
+                    Intent intent = new Intent();
+                    intent.setClass(FirstActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    FirstActivity.this.finish();
+                    break;
+                    case R.id.btn1:
+                        finish();
+                        break;
+                }
             }
         });
     }

@@ -1,24 +1,34 @@
 package com.swufestu.exam1;
 
+import static android.util.Xml.parse;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
+    public int cMaxScore;
     private TextView cScore;
+    private TextView mScore;
+     MaxScore maxScore;
     private static MainActivity mainActivity = null;//创建静态变量mainActivity
     private int score = 0;//计分器
+    private SharedPreferences.Editor editor;
 
     public MainActivity() {
         mainActivity = this;//给静态变量mainActivity赋值
@@ -30,10 +40,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         cScore = (TextView) findViewById(R.id.tScore);//获取分数
+        mScore = (TextView) findViewById(R.id.maxscores);//获取最高分数
+
+           maxScore = new MaxScore(MainActivity.this,"mScore");
+        String maxString = "";
+        try {
+            maxString = maxScore.getValue( "maxScore" + score, String.valueOf( 0 ) );
+        } catch ( Exception e ) {
+            Log.e( TAG, e.toString() );
+        }
 
 
+        try {
+            cMaxScore = Integer.parseInt( maxString.toString() );
+        } catch ( NumberFormatException e ) {
+            cMaxScore = 0;
+        }
+        mScore.setText("" + cMaxScore);
     }
-
 
     public void click(View replay) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -63,7 +87,9 @@ public class MainActivity extends AppCompatActivity {
         dialog1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                System.exit(0);
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, FirstActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -88,7 +114,16 @@ public class MainActivity extends AppCompatActivity {
     public void addScore(int sc) {
         score = score + sc;
         showScore();
+        if (score > cMaxScore) {
+            maxScore.getValue("cMaxScore"+score,score+"");
+            cMaxScore = score;
+
+            mScore.setText("" + cMaxScore);
+            cScore.setText(""+score);
+
+        }
     }
+
 
     public static MainActivity getMainActivity() {
         return mainActivity;
@@ -118,6 +153,27 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+    private long exitTime = 0;
+
+    @SuppressLint("WrongConstant")
+    public boolean onKeyDown(int keyCode, KeyEvent event) {//添加返回键监听
+
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                Toast.makeText(this, "再按一次退出程序", 1000).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    //KEYCODE_BACK 对应触发事件：按下返回键；
+    //ACTION_DOWN 对应触发事件：手指按下按键；
 
 
 

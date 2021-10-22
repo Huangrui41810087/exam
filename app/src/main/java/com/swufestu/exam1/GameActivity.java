@@ -111,8 +111,10 @@ public class GameActivity extends GridLayout {
                 card.setNum(0);					//初始值为0
                 addView(card,cWidth,cHeight);//添加
                 cMap[i][j] = card;
+
             }
         }
+
     }
 
     private void startGame(){
@@ -334,7 +336,7 @@ public class GameActivity extends GridLayout {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     Log.i(TAG, "onClick: 退出游戏");
-                   System.exit(0);
+                    MainActivity.getMainActivity().finish();
                 }
             });//添加两个按钮，监听动作
 

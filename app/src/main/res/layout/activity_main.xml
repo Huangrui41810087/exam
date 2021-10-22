@@ -13,21 +13,37 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
-
-        android:gravity="center">
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cscore"
             android:textSize="24dp"
+            android:layout_marginLeft="50dp"
          />
 
         <TextView
             android:id="@+id/tScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24dp"/>
+            android:textSize="24dp"
+            android:text=""
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/maxscore"
+            android:textSize="24dp"
+            android:layout_marginLeft="30dp"
+            />
+
+        <TextView
+            android:id="@+id/maxscores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24dp"
+            android:text=""/>
 
     </LinearLayout>
     <LinearLayout
@@ -41,19 +57,18 @@
             android:id="@+id/replay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="70dp"
             android:onClick="click"
             android:text="@string/replay" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
-        android:text="@string/end"
-        android:id="@+id/end"
-        android:onClick="clickb"
-        />
-</LinearLayout>
+        <Button
+            android:id="@+id/end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:onClick="clickb"
+            android:text="@string/end" />
+    </LinearLayout>
 
     <com.swufestu.exam1.GameActivity
         android:id="@+id/gameActivity"
