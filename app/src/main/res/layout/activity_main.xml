@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
+
         android:gravity="center">
 
         <TextView
@@ -33,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+
         android:layout_marginTop="0dp">
 
         <Button
@@ -49,7 +51,8 @@
         android:layout_marginLeft="120dp"
         android:text="@string/end"
         android:id="@+id/end"
-        android:onClick="clickb"/>
+        android:onClick="clickb"
+        />
 </LinearLayout>
 
     <com.swufestu.exam1.GameActivity

@@ -8,12 +8,12 @@ import android.graphics.Point;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.GridLayout;
-
-
-
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -343,10 +343,6 @@ public class GameActivity extends GridLayout {
         }
 
     }
-
-    private void startActivity(Intent intent) {
-    }
-
 
 }
 

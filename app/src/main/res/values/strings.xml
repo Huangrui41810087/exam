@@ -4,5 +4,11 @@
     <string name="begin">开始游戏</string>
     <string name="replay">重新开始</string>
     <string name="end">退出游戏</string>
+    <string name="setting">设置</string>
+    <string name="savety">账号与安全</string>
+    <string name="character">字体设置</string>
+    <string name="message">消息通知</string>
+    <string name="other">关于2048与帮助</string>
+    <string name="exit">退出账号</string>
 
 </resources>
