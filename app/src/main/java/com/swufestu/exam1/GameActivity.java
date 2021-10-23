@@ -1,19 +1,18 @@
 package com.swufestu.exam1;
 
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
+
 import android.graphics.Point;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.GridLayout;
-import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -24,6 +23,8 @@ public class GameActivity extends GridLayout {
 
     private CardActivity[][] cMap=new CardActivity[4][4];//利用二维数组来存放网格
     private List<Point> emptyPoints = new ArrayList<Point>();//利用数组来存放空点位置
+
+
     public GameActivity(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initGameActivity();
@@ -46,11 +47,12 @@ public class GameActivity extends GridLayout {
         cWidth = dm.widthPixels;
         return (cWidth-10)/4;//留出图片和边缘的大小
     }
-    private void initGameActivity(){
+    private void initGameActivity(){//初始化游戏页面
 
-       setBackgroundColor(0xffE0FFFF);
-       setColumnCount(4);
+        setBackgroundColor(0xffE0FFFF);
+        setColumnCount(4);
         addCards(GetcWidth(),GetcWidth());//添加卡片
+
 
         setOnTouchListener(new View.OnTouchListener(){//监听用户触摸动作
             private float X;
@@ -102,7 +104,7 @@ public class GameActivity extends GridLayout {
         super.onSizeChanged(w, h, oldw, oldh);
         startGame();
     }
-    private void addCards(int cWidth,int cHeight){
+    private void addCards(int cWidth,int cHeight){//添加卡片对象
         CardActivity card;
         //4*4
         for(int j=0;j<4;j++){
@@ -117,36 +119,23 @@ public class GameActivity extends GridLayout {
 
     }
 
-    private void startGame(){
+    private void startGame(){//开始游戏
 
         MainActivity.getMainActivity().clearScore();
-               for (int i=0;i<4;i++){
-                   for (int j=0;j<4;j++){
-                       cMap[i][j].setNum(0);//游戏开始时都初始为0
-                   }
-               }
-               RandomNum();
-               RandomNum();
+        for (int i=0;i<4;i++){
+            for (int j=0;j<4;j++){
+                cMap[i][j].setNum(0);//游戏开始时都初始为0
+            }
+        }
         RandomNum();
         RandomNum();
-        RandomNum();
-        RandomNum();
-        RandomNum();
-        RandomNum();
-        RandomNum();
-        RandomNum();
-        RandomNum();
-        RandomNum();
-        RandomNum();
-        RandomNum();
-        RandomNum();
-        RandomNum();
+
 
     }
 
 
 
-    private void RandomNum(){
+    private void RandomNum(){//添加随机值
 
         emptyPoints.clear();//先清空空点
         for(int j=0;j<4;j++){
@@ -157,7 +146,24 @@ public class GameActivity extends GridLayout {
             }
         }
         Point p = emptyPoints.remove((int)(Math.random()*emptyPoints.size()));//空点的值都为0
-        cMap[p.x][p.y].setNum(Math.random()>0.3?2:4);//2和4随机数生成的概率
+        cMap[p.x][p.y].setNum(Math.random()>0.2?2:4);//2和4随机数生成的概率
+    }
+
+    //添加随机卡片
+    private void RandomCard(){//添加随即卡片
+        emptyPoints.clear();
+        for (int j = 0;j<4;j++){
+            for (int i = 0;i<4;i++){
+                if (cMap[i][j].getNum()<=0){
+                    emptyPoints.add(new Point(i,j));
+                }
+            }
+        }
+        //把一张空卡片换成带数字的
+        Point p = emptyPoints.remove((int)(Math.random()*emptyPoints.size()));
+        cMap[p.x][p.y].setNum(Math.random()>0.1?2:4);
+        AnimActivity.showScrollAnim(cMap[p.x][p.y]);
+
     }
 
     private void moveLeft(){//从左向右遍历
@@ -174,6 +180,7 @@ public class GameActivity extends GridLayout {
                             i--;//往左遍历
 
                             merge = true;
+
                         }
                         else if(cMap[i][j].equals(cMap[i1][j])){
                             cMap[i][j].setNum(cMap[i][j].getNum()*2);//合并相同的数
@@ -189,6 +196,7 @@ public class GameActivity extends GridLayout {
         }
         if(merge){//只要有合并就添加随机数
             RandomNum();
+            RandomCard();
             endGame();
         }
     }
@@ -225,6 +233,7 @@ public class GameActivity extends GridLayout {
         }
         if(merge){
             RandomNum();
+            RandomCard();
             endGame();
         }
     }
@@ -261,6 +270,7 @@ public class GameActivity extends GridLayout {
         }
         if(merge){
             RandomNum();
+            RandomCard();
             endGame();
         }
     }
@@ -299,6 +309,7 @@ public class GameActivity extends GridLayout {
         }
         if(merge){
             RandomNum();
+            RandomCard();
             endGame();
         }
     }
@@ -347,7 +358,3 @@ public class GameActivity extends GridLayout {
     }
 
 }
-
-
-
-

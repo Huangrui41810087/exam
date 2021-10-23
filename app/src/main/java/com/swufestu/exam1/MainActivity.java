@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mScore;
      MaxScore maxScore;
     private static MainActivity mainActivity = null;//创建静态变量mainActivity
+    private static AnimActivity animActivity = null;//创建静态变量mainActivity
     private int score = 0;//计分器
     private SharedPreferences.Editor editor;
 
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         cScore.setText(score + "");
     }
 
-    public void addScore(int sc) {
+    public void addScore(int sc) {//计分
         score = score + sc;
         showScore();
         if (score > cMaxScore) {
@@ -127,8 +128,12 @@ public class MainActivity extends AppCompatActivity {
 
     public static MainActivity getMainActivity() {
         return mainActivity;
+
     }
 
+    public static AnimActivity getAnimActivity() {
+        return animActivity;
+    }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.my_menu, menu);

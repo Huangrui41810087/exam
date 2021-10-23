@@ -69,14 +69,28 @@
             android:onClick="clickb"
             android:text="@string/end" />
     </LinearLayout>
+<FrameLayout
+    android:id="@+id/gameContainer"
+    android:layout_width="fill_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1">
 
     <com.swufestu.exam1.GameActivity
         android:id="@+id/gameActivity"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="20dp"
         android:layout_weight="1">
     </com.swufestu.exam1.GameActivity>
 
+    <com.swufestu.exam1.AnimActivity
+        android:id="@+id/animLayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.swufestu.exam1.AnimActivity>
+
+
+
+</FrameLayout>
 
 </LinearLayout>

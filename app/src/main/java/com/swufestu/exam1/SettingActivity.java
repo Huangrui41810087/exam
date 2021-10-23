@@ -19,7 +19,7 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         Button btn = (Button) findViewById(R.id.exit);
-        btn.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener() {//监听退出按钮
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();

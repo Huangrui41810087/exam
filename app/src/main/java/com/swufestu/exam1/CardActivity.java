@@ -28,68 +28,65 @@ public class CardActivity extends FrameLayout {
     }
 
     public void setNum(int num) {
+
         this.num = num;
         if(num<=0) {//如果数字为0，得到空字符串
             tv.setText("");
         }else{
             tv.setText(num+"");//将整形数转换为字符串
         }
+        switch (num) {
+            case 0:
+                tv.setBackgroundColor(0xffCCC0B3);
+                break;
+            case 2:
+                tv.setBackgroundColor(0xffEEE4DA);
+                break;
+            case 4:
+                tv.setBackgroundColor(0xffEDE0C8);
+                break;
+            case 8:
+                tv.setBackgroundColor(0xffF2B179);
+                break;
+            case 16:
+                tv.setBackgroundColor(0xffF49563);
+                break;
+            case 32:
+                tv.setBackgroundColor(0xffF5794D);
+                break;
+            case 64:
+                tv.setBackgroundColor(0xffF55D37);
+                break;
+            case 128:
+                tv.setBackgroundColor(0xffEEE863);
+                break;
+            case 256:
+                tv.setBackgroundColor(0xffEDB04D);
+                break;
+            case 512:
+                tv.setBackgroundColor(0xffECB04D);
+                break;
+            case 1024:
+                tv.setBackgroundColor(0xffEB9437);
+                break;
+            case 2048:
+                tv.setBackgroundColor(0xffEA7821);
+                break;
+            default:
+                tv.setBackgroundColor(0xffEA7821);
+                break;
+
+        }
     }
+
+    public TextView getTvCard(){return tv;}
+
 
 
     public boolean equals(CardActivity o) {
         return this.getNum()==o.getNum();
     }
 
-    // 设置背景色
-    private int defaultBackColor = 0x338B8B00;
-
-    private int getBackColor(int num) {
-
-        int bgcolor = defaultBackColor;
-        switch (num) {
-            case 0:
-                bgcolor = 0xffCCC0B3;
-                break;
-            case 2:
-                bgcolor = 0xffEEE4DA;
-                break;
-            case 4:
-                bgcolor = 0xffEDE0C8;
-                break;
-            case 8:
-                bgcolor = 0xffF2B179;// #F2B179
-                break;
-            case 16:
-                bgcolor = 0xffF49563;
-                break;
-            case 32:
-                bgcolor = 0xffF5794D;
-                break;
-            case 64:
-                bgcolor = 0xffF55D37;
-                break;
-            case 128:
-                bgcolor = 0xffEEE863;
-                break;
-            case 256:
-                bgcolor = 0xffEDB04D;
-                break;
-            case 512:
-                bgcolor = 0xffECB04D;
-                break;
-            case 1024:
-                bgcolor = 0xffEB9437;
-                break;
-            case 2048:
-                bgcolor = 0xffEA7821;
-                break;
-            default:
-                bgcolor = 0xffEA7821;
-                break;
-        }
-        return bgcolor;
-    }
 
 
 

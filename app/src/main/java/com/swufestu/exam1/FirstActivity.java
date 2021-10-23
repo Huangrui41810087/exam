@@ -17,7 +17,7 @@ public class FirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
         btn = (Button)findViewById(R.id.btn);
-        btn.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener() {//监听两个按钮
             @Override
             public void onClick(View v) {
                 switch (v.getId()) {
@@ -34,11 +34,11 @@ public class FirstActivity extends AppCompatActivity {
             }
         });
     }
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {//创建菜单
         getMenuInflater().inflate(R.menu.my_menu, menu);
         return true;
     }
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {//设置菜单栏的事件
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case R.id.setting:
