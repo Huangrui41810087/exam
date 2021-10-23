@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
+import android.content.Intent;
 import android.graphics.Point;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -147,24 +148,10 @@ public class GameActivity extends GridLayout {
         }
         Point p = emptyPoints.remove((int)(Math.random()*emptyPoints.size()));//空点的值都为0
         cMap[p.x][p.y].setNum(Math.random()>0.2?2:4);//2和4随机数生成的概率
-    }
-
-    //添加随机卡片
-    private void RandomCard(){//添加随即卡片
-        emptyPoints.clear();
-        for (int j = 0;j<4;j++){
-            for (int i = 0;i<4;i++){
-                if (cMap[i][j].getNum()<=0){
-                    emptyPoints.add(new Point(i,j));
-                }
-            }
-        }
-        //把一张空卡片换成带数字的
-        Point p = emptyPoints.remove((int)(Math.random()*emptyPoints.size()));
-        cMap[p.x][p.y].setNum(Math.random()>0.1?2:4);
         AnimActivity.showScrollAnim(cMap[p.x][p.y]);
-
     }
+
+
 
     private void moveLeft(){//从左向右遍历
 
@@ -196,7 +183,7 @@ public class GameActivity extends GridLayout {
         }
         if(merge){//只要有合并就添加随机数
             RandomNum();
-            RandomCard();
+
             endGame();
         }
     }
@@ -233,7 +220,7 @@ public class GameActivity extends GridLayout {
         }
         if(merge){
             RandomNum();
-            RandomCard();
+
             endGame();
         }
     }
@@ -270,7 +257,7 @@ public class GameActivity extends GridLayout {
         }
         if(merge){
             RandomNum();
-            RandomCard();
+
             endGame();
         }
     }
@@ -309,7 +296,7 @@ public class GameActivity extends GridLayout {
         }
         if(merge){
             RandomNum();
-            RandomCard();
+
             endGame();
         }
     }
@@ -346,8 +333,7 @@ public class GameActivity extends GridLayout {
             dialog.setNegativeButton("退出游戏",new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    Log.i(TAG, "onClick: 退出游戏");
-                    MainActivity.getMainActivity().finish();
+                    System.exit(0);
                 }
             });//添加两个按钮，监听动作
 
