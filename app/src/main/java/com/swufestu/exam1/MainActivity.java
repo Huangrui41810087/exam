@@ -1,16 +1,13 @@
 package com.swufestu.exam1;
 
-import static android.util.Xml.parse;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,45 +16,66 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    public int cMaxScore;
+    private SharedPreferences sp;
+    SharedPreferences.Editor editor;
+    private int score = 0;//计分器
     private TextView cScore;
     private TextView mScore;
-     MaxScore maxScore;
+
     private static MainActivity mainActivity = null;//创建静态变量mainActivity
-    private static AnimActivity animActivity = null;//创建静态变量mainActivity
-    private int score = 0;//计分器
-    private SharedPreferences.Editor editor;
 
     public MainActivity() {
         mainActivity = this;//给静态变量mainActivity赋值
     }
+
+    public static MainActivity getMainActivity() { return mainActivity; }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        cScore = (TextView) findViewById(R.id.tScore);//获取分数
+        cScore = (TextView) findViewById(R.id.cScore);//获取当前分数
+        cScore.setText("0");
         mScore = (TextView) findViewById(R.id.maxscores);//获取最高分数
+        mScore.setText("0");
+        showMaxScore();
+    }
 
-           maxScore = new MaxScore(MainActivity.this,"mScore");
-        String maxString = "";
-        try {
-            maxString = maxScore.getValue( "maxScore" + score, String.valueOf( 0 ) );
-        } catch ( Exception e ) {
-            Log.e( TAG, e.toString() );
+    public void clearScore() {//重置分数
+        score = 0;
+        showscore();
+    }
+    public void showscore(){
+        cScore.setText(score + "");
+    }
+
+    public void addScore(int num) {//计分
+        score = score + num;
+        showscore();
+
+        if (score > this.getMaxScore()) {
+            this.setMaxscore(score);
+            mScore.setText(score + "");
         }
+    }
 
+    public int getMaxScore() {//获取最高分
+        sp = mScore.getContext().getSharedPreferences("maxScore", Context.MODE_PRIVATE);
+        int maxScore = sp.getInt("maxScore",0);
+        return maxScore;
+    }
+    public void setMaxscore(int mscore){
+        sp = mScore.getContext().getSharedPreferences("maxScore", Context.MODE_PRIVATE);
+        editor = sp.edit();
+        editor.putInt("maxScore", mscore);
+        editor.commit();
+    }
 
-        try {
-            cMaxScore = Integer.parseInt( maxString.toString() );
-        } catch ( NumberFormatException e ) {
-            cMaxScore = 0;
-        }
-        mScore.setText("" + cMaxScore);
+    public void showMaxScore() {//在文本框中显示最高分
+        mScore.setText(this.getMaxScore() +"");
     }
 
     public void click(View replay) {
@@ -88,9 +106,7 @@ public class MainActivity extends AppCompatActivity {
         dialog1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, FirstActivity.class);
-                startActivity(intent);
+                MainActivity.getMainActivity().finish();
             }
         });
 
@@ -102,59 +118,23 @@ public class MainActivity extends AppCompatActivity {
         dialog1.show();
     }
 
-
-    public void clearScore() {//重置分数
-        score = 0;
-        showScore();
-    }
-
-    public void showScore() {//分数呈现
-        cScore.setText(score + "");
-    }
-
-    public void addScore(int sc) {//计分
-        score = score + sc;
-        showScore();
-        if (score > cMaxScore) {
-            maxScore.getValue("cMaxScore"+score,score+"");
-            cMaxScore = score;
-
-            mScore.setText("" + cMaxScore);
-            cScore.setText(""+score);
-
-        }
-    }
-
-
-    public static MainActivity getMainActivity() {
-        return mainActivity;
-
-    }
-
-    public static AnimActivity getAnimActivity() {
-        return animActivity;
-    }
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.my_menu, menu);
+    public boolean onCreateOptionsMenu(Menu menu) {//创造菜单
+        getMenuInflater().inflate(R.menu.my_menu1, menu);
         return true;
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
-        if(item.getItemId()==R.id.help) {
-
+        if(item.getItemId()==R.id.help1) {
             AlertDialog.Builder dialog;
             dialog = new AlertDialog.Builder(this);
             dialog.setTitle("hey,guy！");
-            dialog.setMessage("这么简单的游戏你确定需要帮助？");
+            dialog.setMessage("这么简单的游戏你确定需要提示？");
             dialog.setNegativeButton("继续玩~", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-
                 }
             });
             dialog.show();
-
         }
         return true;
     }
@@ -181,8 +161,8 @@ public class MainActivity extends AppCompatActivity {
     //ACTION_DOWN 对应触发事件：手指按下按键；
 
 
-
 }
+
 
 
 

@@ -17,18 +17,14 @@ public class CardActivity extends FrameLayout {
         LayoutParams lp = new LayoutParams(-1,-1);//填充满
         lp.setMargins(10,10,0,0);
         addView(tv,lp);
-
         setNum(0);
     }
 
     private int num = 0;
-
     public int getNum(){
         return num;
     }
-
     public void setNum(int num) {
-
         this.num = num;
         if(num<=0) {//如果数字为0，得到空字符串
             tv.setText("");
@@ -81,10 +77,8 @@ public class CardActivity extends FrameLayout {
 
     public TextView getTvCard(){return tv;}
 
-
-
-    public boolean equals(CardActivity o) {
-        return this.getNum()==o.getNum();
+    public boolean equals(CardActivity c) {
+        return this.getNum()==c.getNum();
     }
 
 

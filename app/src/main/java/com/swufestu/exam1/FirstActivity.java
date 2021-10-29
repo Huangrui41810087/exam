@@ -2,6 +2,8 @@ package com.swufestu.exam1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,7 +30,7 @@ public class FirstActivity extends AppCompatActivity {
                     FirstActivity.this.finish();
                     break;
                     case R.id.btn1:
-                        finish();
+                     System.exit(0);
                         break;
                 }
             }
@@ -46,10 +48,20 @@ public class FirstActivity extends AppCompatActivity {
                 intent.setClass(FirstActivity.this, SettingActivity.class);
                 startActivity(intent);
                 FirstActivity.this.finish();
-
                 break;
-
             case R.id.help:
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                dialog.setTitle("开发者：HR");
+                dialog.setMessage("开发时间：2021年10月20日");
+                dialog.setPositiveButton("返回首页", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent();
+                        intent.setClass( FirstActivity.this, FirstActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                dialog.show();
                 break;
         }
         return true;
